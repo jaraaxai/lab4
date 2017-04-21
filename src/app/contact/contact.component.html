@@ -1,0 +1,34 @@
+<h3><i>Just a FormControl</i></h3>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<label class="center-block">Name:
+  <input class="form-control" formControlName="name">
+  <div class="help-inline" [hidden]="myForm.controls['name'].valid || (myForm.controls['name'].pristine && !submitted)">Required!</div>
+</label>
+  <label class="center-block">Email:
+    <input class="form-control" formControlName="email">
+    <div [hidden]="myForm.controls['email'].valid || (myForm.controls['email'].pristine && !submitted)">Required!</div>
+  </label>
+  <label class="center-block">Post:
+    <input class="form-control" formControlName="post">
+    <div [hidden]="myForm.controls['post'].valid || (myForm.controls['post'].pristine && !submitted)">Minimum length 10</div>
+  </label>
+  <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
+  <button type="button" class="btn btn-danger" (click)="getData()">Get Data</button>
+
+</form>
+
+<p>Form value: {{ myForm.value | json }}</p>
+<p>Form status: {{ myForm.status | json }}</p>
+
+<div *ngIf="user">
+  <hr/>
+  <b>User:</b> {{user | json}}
+</div>
+
+<div *ngIf="posts">
+  <hr/>
+  <b>Posts:</b>
+  <ul>
+    <li *ngFor="let po of posts" > {{po.title}} </li>
+  </ul>
+</div>
